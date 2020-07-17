@@ -1,12 +1,13 @@
 import React from 'react'
 import { useMachine } from '@xstate/react'
 import { redditMachine } from './machine/redditMachine'
+import { Subreddit } from './Subreddit.app'
 
 const subreddits = ['frontend', 'reactjs', 'vuejs']
 
-const RedditApp = () => {
+export const RedditApp = () => {
   const [current, send] = useMachine(redditMachine)
-  const { subreddit, posts } = current.context
+  const { subreddit } = current.context
 
   return (
     <main>
@@ -21,17 +22,7 @@ const RedditApp = () => {
           })}
         </select>
       </header>
-      <div>
-        <h1>{current.matches('idle') ? 'Select a subreddit' : subreddit}</h1>
-        {current.matches({ selected: 'loading' }) && <div>Loading...</div>}
-        {current.matches({ selected: 'loaded'}) && (
-          <ul>
-            {posts.map(post => (
-              <li key={post.title}>{post.title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {subreddit && <Subreddit name={subreddit} key={subreddit.id} />}
     </main>
   )
 }
