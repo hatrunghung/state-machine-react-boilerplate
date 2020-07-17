@@ -1,0 +1,2 @@
+## Motivation:
+In the utils directory, it's best to write function and utilities that should not be violating the DRY principle, e.g: wrapper function, wrapper function that wrapped wrapper function :)
