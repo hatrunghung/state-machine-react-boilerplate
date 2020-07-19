@@ -1,23 +1,16 @@
-function client(endpoint, {body, ...customConfig} = {}) {
-  const headers = {
-    'Content-Type': 'application/json'
-  }
+function client(endpoint, customConfig) {
+  // const headers = {
+  //   'Content-Type': 'application/json'
+  // }
   const config = {
-    method: body ? 'POST' : 'GET',
+    method: 'GET',
     ...customConfig,
-    headers,
-    ...customConfig.headers
+    // headers,
+    // ...customConfig.headers
   }
 
-  return window.fetch(endpoint, config).then(async response => {
-    const data = response.json()
-
-    if (response.ok) {
-      return data
-    } else {
-      return Promise.reject(data)
-    }
-  })
+  return window.fetch(endpoint, config)
+    .then(response => response.json())
 }
 
 export default client

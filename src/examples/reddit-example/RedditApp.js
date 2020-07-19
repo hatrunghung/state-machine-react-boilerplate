@@ -1,7 +1,8 @@
+import './styles.scss'
 import React from 'react'
 import { useMachine } from '@xstate/react'
 import { redditMachine } from './machine/redditMachine'
-import { Subreddit } from './Subreddit.app'
+import { Subreddit } from './Subreddit'
 
 const subreddits = ['frontend', 'reactjs', 'vuejs']
 
@@ -10,19 +11,26 @@ export const RedditApp = () => {
   const { subreddit } = current.context
 
   return (
-    <main>
+    <main
+      data-machine={redditMachine.id}
+      data-state={current.toStrings().join(" ")}
+    >
       <header>
         <select
           onChange={e => {
-            send('SELECT', { name: e.target.value })
+            send("SELECT", { name: e.target.value })
           }}
         >
+          <option disabled>Select one</option>
           {subreddits.map(subreddit => {
             return <option key={subreddit}>{subreddit}</option>
           })}
         </select>
       </header>
-      {subreddit && <Subreddit name={subreddit} key={subreddit.id} />}
+      <div>
+        <h1>{current.matches("idle") ? "Select a subreddit" : null}</h1>
+        {subreddit && <Subreddit service={subreddit} key={subreddit.id} />}
+      </div>
     </main>
   )
 }
