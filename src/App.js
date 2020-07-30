@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { RedditApp } from './examples/reddit-example/RedditApp'
 

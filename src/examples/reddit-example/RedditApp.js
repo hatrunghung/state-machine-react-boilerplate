@@ -10,6 +10,8 @@ export const RedditApp = () => {
   const [current, send] = useMachine(redditMachine)
   const { subreddit } = current.context
 
+  // console.log('subreddit instance', subreddit)
+
   return (
     <main
       data-machine={redditMachine.id}

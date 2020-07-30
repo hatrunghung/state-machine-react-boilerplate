@@ -26,6 +26,9 @@ export const redditMachine = Machine({
         // Otherwise, spawn a new subreddit actor and
         // save it in the subreddits object
         subreddit = spawn(createSubredditMachine(event.name));
+        // console.log(event.name)
+        // console.log('subreddits', context.subreddits)
+        // console.log('subreddit', subreddit)
 
         return {
           subreddits: {
